@@ -106,7 +106,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
     // var toolTip = d3.tip()
     // .attr("class", "tooltip")
     // .offset([80, -60])
-    // .html(d => `${d.rockband}<br>${label} ${d[chosenXAxis]}`);
+    // .html(d => `${d.censusData}<br>${Ylabel} ${d[chosenXAxis]}`);
 
   circlesGroup.call(toolTip);
 
@@ -143,11 +143,11 @@ censusData.forEach(data => {
 })
 // console.log(censusData);
 var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(censusData, data => data.smokes)])
+    .domain([(d3.min(censusData, data => data.smokes)-2), d3.max(censusData, data => data.smokes)+2])
     .range([height, 0]);
 
 var xLinearScale = d3.scaleLinear()
-    .domain([d3.max(censusData, data => data.poverty), 0])
+    .domain([d3.max(censusData, data => data.poverty)+2, d3.min(censusData, data => data.poverty)-2])
     .range([height, 0]);
     // console.log(d3.max(censusData, data => data.poverty));
 
@@ -155,7 +155,7 @@ var bottomAxis = d3.axisBottom(xLinearScale);
 var leftAxis = d3.axisLeft(yLinearScale);
 
   // append x axis
-  var xAxis = chartGroup.append("g")
+ chartGroup.append("g")
     .classed("x-axis", true)
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
@@ -165,7 +165,7 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .call(leftAxis);
 
   // append initial circles
-  var circlesGroup = chartGroup.selectAll("circle")
+  chartGroup.selectAll("circle")
     .data(censusData)
     .join("circle")
     .attr("cx", d => xLinearScale(d.poverty))
@@ -179,21 +179,21 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
    labelsGroup.append("text")
-    .attr("x", 0)
+    .attr("x", 0 - (width / 8))
     .attr("y", 20)
     .attr("value", "is_smoker") // value to grab for event listener
     .classed("active", true)
     .text("Smokers (%)");
 
    labelsGroup.append("text")
-    .attr("x", 0)
+    .attr("x", 0 - (width / 8))
     .attr("y", 40)
     .attr("value", "in_poverty") // value to grab for event listener
     .classed("inactive", true)
     .text("Age (Median)");
 
    labelsGroup.append("text")
-    .attr("x", 0)
+    .attr("x", 0 - (width / 8))
     .attr("y", 60)
     .attr("value", "in_poverty") // value to grab for event listener
     .classed("inactive", true)
