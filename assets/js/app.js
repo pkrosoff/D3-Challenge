@@ -171,18 +171,33 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.smokes))
     .attr("r", 12)
-    .attr("fill", "lightblue")
+    .attr("fill", "blue")
     .attr("opacity", 0.5)
     .attr("stroke", "black");
 
-    svg.selectAll("text")
+
+    svg.append("g")
+    .attr("text-anchor", "middle")
+    .selectAll("text")
     .data(censusData)
     .join("text")
-    .attr("x", d => xLinearScale(d.poverty))
-    .attr("y", d => yLinearScale(d.smokes))
-    .text(d => d.abbr)
+    .attr("id", "abbr")
+    .attr("dy", "0.35em")
+    .attr("x", d =>  xLinearScale(d.poverty) + margin.left)
+    .attr("y", d => yLinearScale(d.smokes) + margin.top)
     .attr("font-size", "10px")
-    .attr("color", "black");
+    .attr("fill", "white")
+    .text(d => d.abbr);
+
+    // chartGroup.selectAll("labels")
+    // .data(censusData)
+    // .join("labels")
+    // .attr("x", d => xLinearScale(d.poverty))
+    // .attr("y", d => yLinearScale(d.smokes))
+    // .text(d => d.abbr) //only getting second half of states??? in the wrong place also 
+    // .attr("font-size", "10px")
+    // .attr("color", "black");
+    
         
 
 
