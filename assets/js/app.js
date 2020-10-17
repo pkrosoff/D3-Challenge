@@ -196,6 +196,7 @@ var leftAxis = d3.axisLeft(yLinearScale);
     var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
+// append x axis options
    labelsGroup.append("text")
     .attr("x", 0 - (width / 8))
     .attr("y", 20)
@@ -206,14 +207,14 @@ var leftAxis = d3.axisLeft(yLinearScale);
    labelsGroup.append("text")
     .attr("x", 0 - (width / 8))
     .attr("y", 40)
-    .attr("value", "in_poverty") // value to grab for event listener
+    .attr("value", "median_age") // value to grab for event listener
     .classed("inactive", true)
     .text("Age (Median)");
 
    labelsGroup.append("text")
     .attr("x", 0 - (width / 8))
     .attr("y", 60)
-    .attr("value", "in_poverty") // value to grab for event listener
+    .attr("value", "median_income") // value to grab for event listener
     .classed("inactive", true)
     .text("Household Income (Median)");
 
@@ -222,6 +223,7 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height / 2))
+    .attr("value", "in_poverty")
     .attr("dy", "1em")
     .classed("active", true)
     .text("Poverty (%)");
@@ -230,6 +232,7 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left + 20)
     .attr("x", 0 - (height / 2))
+    .attr("value", "is_obese")
     .attr("dy", "1em")
     .classed("inactive", true)
     .text("Obese (%)");
@@ -238,6 +241,7 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - margin.left + 40)
     .attr("x", 0 - (height / 2))
+    .attr("value", "lacks_healthcare")
     .attr("dy", "1em")
     .classed("inactive", true)
     .text("Lacks Healthcare (%)");
