@@ -175,6 +175,24 @@ var leftAxis = d3.axisLeft(yLinearScale);
     .attr("opacity", 0.5)
     .attr("stroke", "black");
 
+    svg.selectAll("text")
+    .data(censusData)
+    .join("text")
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.smokes))
+    .text(d => d.abbr)
+    .attr("font-size", "10px")
+    .attr("color", "black");
+        
+
+
+    // svg.selectAll("circle")
+    // .transition()
+    // .delay(function(d,i){return(i*3)})
+    // .duration(2000)
+    // .attr("cx", function (d) { return x(d.smokes); } )
+    // .attr("cy", function (d) { return y(d.poverty); } )
+
     var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
